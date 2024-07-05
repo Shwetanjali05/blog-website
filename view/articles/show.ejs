@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Optional: Background color for the whole page */
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%; /* Adjust width as needed */
+        }
+
+        .card {
+            margin-top: 20px; /* Adjust margin as needed */
+        }
+    </style>
+    <title>Blog Website</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4"><%= article.title %></h1>
+        <div class="text-muted mb-3">
+            <%= article.createdAt.toLocaleDateString() %>
+        </div>
+        <a href="/" class="btn btn-secondary me-2">All Articles</a>
+        <a href="/articles/edit/<%= article.id %>" class="btn btn-info me-2">Edit</a>
+        <div class="card">
+            <div class="card-body">
+                <%- article.sanitizedHTML %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
