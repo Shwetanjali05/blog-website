@@ -1,63 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
-        html,
         body {
-            height: 100%;
-            margin: 0;
-            background-image: url('https://i.pinimg.com/736x/8c/29/bb/8c29bb7954f08e2b99d6370e90e74a16.jpg'); /* Adjust path to your image */
+            background-image: url('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdhbGxwYXBlciUyMHdyaXRlfGVufDB8fDB8fHww');
             background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             background-position: center;
+            color: hsl(0, 88%, 36%); /* White text on dark background */
+            position: relative;
+        }
+        .content {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 40px; /* Adjust as needed */
-            padding-bottom: 40px; /* Adjust as needed */
+            min-height: 100vh; /* Full viewport height */
+            padding-top: 4.5rem; /* Adjusted for the fixed navbar */
+            text-align: center; /* Center align text */
         }
-
-        .container {
-            background-color: rgba(189, 115, 58, 0.9); /* Background color for the container */
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
+        .btn-create-blog {
+            margin-top: 1rem;
+            padding: 12px 24px; /* Adjust padding to increase button size */
+            font-size: 1.5rem; /* Increase font size for larger button text */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 3rem; /* Increase font size of headings */
+            color: hsl(0, 83%, 40%); /* White text */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+        }
+        p {
+            font-size: 1.5rem; /* Increase font size of paragraphs */
+            color: hsl(0, 4%, 5%); /* White text */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for the background */
+        }
+        /* Navbar customization */
+        .navbar-brand {
+            font-size: 2rem; /* Increase font size */
+            font-weight: bold; /* Make text bold */
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.5rem; /* Increase font size */
+            font-weight: bold; /* Make text bold */
         }
     </style>
-    <title>Blog Website</title>
 </head>
-
-<body class="text-center">
-    <div class="container">
-        <h1 class="mb-4">Welcome To Blog Website</h1>
-        <a href="/articles/new" class="btn btn-success mb-4">Create Article</a>
-
-        <% articles.forEach(article => { %>
-        <div class="card mb-4 w-100">
-            <div class="card-body">
-                <h4 class="card-title"><%= article.title %></h4>
-                <div class="card-subtitle text-muted mb-2">
-                    <%= article.createdAt.toLocaleDateString() %>
-                </div>
-                <div class="card-text mb-2">
-                    <%= article.description %>
-                </div>
-                <a href="articles/<%= article.slug %>" class="btn btn-primary me-2">Read More</a>
-                <a href="articles/edit/<%= article.id %>" class="btn btn-info me-2">Edit</a>
-                <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-                    <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('Are you sure you want to delete this article?')">Delete</button>
-                </form>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Blog Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/articles/new">Create Article</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <% }) %>
-    </div>
-</body>
+    </nav>
 
+    <div class="content">
+        <h1 class="mb-4">Welcome to Blog Website</h1>
+        <button class="btn btn-primary btn-create-blog" data-bs-toggle="collapse" data-bs-target="#allArticles" aria-expanded="false" aria-controls="allArticles">
+            Show All Articles
+        </button>
+
+        <div class="collapse" id="allArticles">
+            <div class="container mt-4">
+                <% articles.forEach(article => { %>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= article.title %></h5>
+                        <p class="card-text"><%= article.description %></p>
+                        <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
+                        <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+                        <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+</body>
 </html>

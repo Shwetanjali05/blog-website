@@ -1,54 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
+    <title><%= article.title %> -Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <style>
-        html,
         body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0; /* Optional: Background color for the whole page */
+            padding-top: 4.5rem; /* Adjusted for the fixed navbar */
+            background-color: #f8f9fa; /* Light background */
+            font-family: Arial, sans-serif; /* Font family */
         }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%; /* Adjust width as needed */
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
         }
-
         .card {
-            margin-top: 20px; /* Adjust margin as needed */
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow */
+        }
+        .card-title {
+            font-size: 2.5rem; /* Larger title */
+            color: #343a40; /* Dark text */
+        }
+        .card-text {
+            font-size: 1.2rem; /* Increased text size */
+            line-height: 1.6; /* Improved readability */
+            color: #6c757d; /* Slightly muted text color */
+        }
+        .btn-back {
+            margin-top: 20px;
         }
     </style>
-    <title>Blog Website</title>
 </head>
-
 <body>
-    <div class="container">
-        <h1 class="mb-4"><%= article.title %></h1>
-        <div class="text-muted mb-3">
-            <%= article.createdAt.toLocaleDateString() %>
-        </div>
-        <a href="/" class="btn btn-secondary me-2">All Articles</a>
-        <a href="/articles/edit/<%= article.id %>" class="btn btn-info me-2">Edit</a>
-        <div class="card">
-            <div class="card-body">
-                <%- article.sanitizedHTML %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Blog Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/articles/edit/<%= article.id %>">Edit</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</body>
+    </nav>
 
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title"><%= article.title %></h1>
+                <p class="card-text text-muted"><%= article.createdAt.toLocaleDateString() %></p>
+                <div class="card-text">
+                    <%= article.sanitizedHTML %>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="btn btn-secondary btn-back mt-3">Back to All Articles</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

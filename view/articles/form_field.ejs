@@ -1,40 +1,15 @@
-<style>
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0; /* Optional: Background color for the whole page */
-    }
-
-    .form-container {
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        width: 100%; /* Adjust width as needed */
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-</style>
-
-<div class="form-container">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input required value="<%=article.title%>" type="text" name="title" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea name="description" id="description" class="form-control"><%=article.description%></textarea>
-    </div>
-    <div class="form-group">
-        <label for="markdown">BLOG</label>
-        <textarea required name="markdown" id="markdown" class="form-control"><%=article.markdown%></textarea>
-    </div>
-    <br>
+<div class="form-group">
+    <label for="title">Title</label>
+    <input required value="<%=article.title%>" type="text" name="title" class="form-control">
 </div>
+<div class="form-group">
+    <label for="description">Description</label>
+    <textarea name="description" id="description" class="form-control"><%=article.description%></textarea>
+</div>
+<div class="form-group">
+    <label for="markdown">Content</label>
+    <textarea required name="markdown" id="markdown" class="form-control"><%=article.markdown%></textarea>
+</div>
+<br>
+<a href="/" class="btn btn-secondary">Cancel</a>
+<button type="submit" class="btn btn-primary">Save</button>

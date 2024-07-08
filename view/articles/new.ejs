@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous">
-    <title>Blog Website</title>
+    <title>Create New Article -Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: hsl(202, 100%, 35%);
+            border-color: #0056b3;
+        }
+        .btn-cancel {
+            background-color: hwb(247 42% 51%);
+            border-color: #6c757d;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    </style>
 </head>
-
 <body>
     <div class="container">
         <h1 class="mb-4">Create New Article</h1>
-        <form id="articleForm" action="/articles" method="POST">
-            <%- include('form_field') %>
-            <br>
-            <a href="/" class="btn btn-secondary me-2">Cancel</a>
-            <button type="submit" class="btn btn-primary">Save</button>
+        <form action="/articles" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="markdown" class="form-label">Content</label>
+                <textarea class="form-control" id="markdown" name="markdown" rows="6" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Create Article</button>
+            <a href="/" class="btn btn-cancel">Cancel</a>
         </form>
     </div>
 
-    <script>
-        document.getElementById('articleForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting normally
-
-            // Submit the form via fetch or submit() method
-            fetch('/articles', {
-                method: 'POST',
-                body: new FormData(document.getElementById('articleForm'))
-            })
-            .then(response => {
-                // Redirect to the homepage after successful save
-                if (response.ok) {
-                    window.location.href = '/';
-                } else {
-                    throw new Error('Failed to save article');
-                }
-            })
-            .catch(error => {
-                console.error('Error saving article:', error);
-                // Handle error if needed
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
