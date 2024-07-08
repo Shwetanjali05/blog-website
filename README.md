@@ -22,4 +22,25 @@ A simple and interactive blog website built with Node.js, Express, MongoDB, and 
 
 ```bash
 git clone https://github.com/yourusername/blog-website.git
-cd blog-website
+cd blog-website ```
+
+2.Install dependencies:
+```bash
+npm install
+```
+3. Start the MongoDB server
+4. Start the application:
+   ```bash
+   node server.js
+```
+5. Open your browser and navigate to:
+```bash
+http://localhost:3000
+```
+
+## Contributing
+Contributions are welcome! Please fork this repository and submit a pull request for any improvements or bug fixes.
+
+
+Contact
+For any inquiries or feedback, please contact [shwetanjali05@gmail.com].
